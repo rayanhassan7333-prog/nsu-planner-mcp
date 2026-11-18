@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "nsu-planner": {
+      "command": "node",
+      "args": [
+        "/Users/rayanhassan/Documents/antigravity/Devwork OS/nsu-planner-mcp/dist/stdio.js"
+      ]
+    }
+  }
+}
