@@ -1,7 +1,7 @@
 import express from 'express'
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
-import { createPlannerMcpServer } from './src/server.js'
+import { createPlannerMcpServer } from './server.js'
 
 const app = express()
 const port = process.env.PORT || 3000
