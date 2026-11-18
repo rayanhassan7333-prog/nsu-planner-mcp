@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "nsu-planner": {
+      "url": "https://nsu-planner-mcp.vercel.app/mcp"
+    }
+  }
+}
