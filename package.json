@@ -9,7 +9,8 @@
     "dev:stdio": "tsx src/stdio.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "start:stdio": "node dist/stdio.js"
+    "start:stdio": "node dist/stdio.js",
+    "bundle:plugin": "zip -r nsu-advising-planner.zip .claude-plugin skills .mcp.json"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.1.0",
