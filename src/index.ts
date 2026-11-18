@@ -9,21 +9,8 @@ const port = process.env.PORT || 3000
 // In serverless instances, keep a session registry for SSE
 const sseTransports = new Map<string, SSEServerTransport>()
 
-// Streamable HTTP transport for modern MCP clients (Claude)
-const streamableTransport = new StreamableHTTPServerTransport({
-  sessionIdGenerator: undefined, // Stateless mode
-})
-
-const mcpServer = createPlannerMcpServer()
-let streamableConnected = false
-
-async function getConnectedStreamableTransport() {
-  if (!streamableConnected) {
-    await mcpServer.connect(streamableTransport)
-    streamableConnected = true
-  }
-  return streamableTransport
-}
+// Standard JSON body parsing needed for Streamable HTTP POST
+app.use(express.json())
 
 // Health check / root
 app.get('/', (_req, res) => {
@@ -39,18 +26,47 @@ app.get('/', (_req, res) => {
   })
 })
 
-// 1. Streamable HTTP endpoint (/mcp)
-app.all('/mcp', async (req, res) => {
+// 1. Streamable HTTP endpoint (/mcp) - used by Claude & modern MCP clients
+app.post('/mcp', async (req, res) => {
+  const server = createPlannerMcpServer()
   try {
-    const transport = await getConnectedStreamableTransport()
-    await transport.handleRequest(req, res)
-  } catch (err: any) {
-    console.error('Error in /mcp handler:', err)
-    res.status(500).json({ error: err.message })
+    const transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: undefined, // Stateless mode
+    })
+    await server.connect(transport)
+    await transport.handleRequest(req, res, req.body)
+
+    res.on('close', () => {
+      transport.close()
+      server.close()
+    })
+  } catch (error: any) {
+    console.error('Error handling MCP request:', error)
+    if (!res.headersSent) {
+      res.status(500).json({
+        jsonrpc: '2.0',
+        error: {
+          code: -32603,
+          message: error.message || 'Internal server error',
+        },
+        id: null,
+      })
+    }
   }
 })
 
-// 2. SSE endpoint (/sse)
+app.get('/mcp', async (_req, res) => {
+  res.status(405).json({
+    jsonrpc: '2.0',
+    error: {
+      code: -32000,
+      message: 'Method not allowed. Use POST for Streamable HTTP.',
+    },
+    id: null,
+  })
+})
+
+// 2. SSE endpoint (/sse) - used by Gemini & older MCP clients
 app.get('/sse', async (_req, res) => {
   res.setHeader('Content-Type', 'text/event-stream')
   res.setHeader('Cache-Control', 'no-cache, no-transform')
