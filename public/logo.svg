@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Background Gradient (Obsidian Slate) -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <!-- Aesthetic Iris / Cyan Gradient -->
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="48%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+
+    <!-- Soft Ambient Glow Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)"/>
+  <rect width="506" height="506" x="3" y="3" rx="117" stroke="rgba(255, 255, 255, 0.1)" stroke-width="6"/>
+
+  <!-- Ambient Glow Behind Symbol -->
+  <path d="M 160 368 V 144 L 352 368 V 144"
+        stroke="url(#brandGrad)"
+        stroke-width="66"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity="0.38"
+        filter="url(#softGlow)"/>
+
+  <!-- Main 'N' Monogram Geometric Ribbon -->
+  <path d="M 160 368 V 144 L 352 368 V 144"
+        stroke="url(#brandGrad)"
+        stroke-width="56"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Intelligence / Precision Sparkle -->
+  <path d="M 390 108 Q 390 124 406 124 Q 390 124 390 140 Q 390 124 374 124 Q 390 124 390 108 Z"
+        fill="#38BDF8"/>
+</svg>

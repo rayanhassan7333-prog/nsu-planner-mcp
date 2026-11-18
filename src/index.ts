@@ -12,6 +12,9 @@ const sseTransports = new Map<string, SSEServerTransport>()
 // Standard JSON body parsing needed for Streamable HTTP POST
 app.use(express.json())
 
+// Serve static assets (logo.png, favicon.ico)
+app.use(express.static('public'))
+
 // Health check / root
 app.get('/', (_req, res) => {
   res.json({

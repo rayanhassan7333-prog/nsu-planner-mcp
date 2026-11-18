@@ -6,10 +6,17 @@ import { solveRoutines } from './engine/solver.js'
 import type { CourseRow } from './types/index.js'
 
 export function createPlannerMcpServer(): McpServer {
-  const server = new McpServer({
-    name: 'nsu-course-planner',
-    version: '1.0.0',
-  })
+  const server = new McpServer(
+    {
+      name: 'NSU Advising Planner',
+      version: '1.0.0',
+    },
+    {
+      capabilities: {
+        tools: {},
+      },
+    }
+  )
 
   // 1. Tool: list_semesters
   server.tool(

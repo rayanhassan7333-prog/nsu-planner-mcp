@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Smart course advising assistant for North South University (NSU). Automates timetable generation, clash detection, faculty preferences, and final exam conflict prevention.",
   "author": "Rayan Hassan",
+  "icon": "https://nsu-planner-mcp.vercel.app/logo.png",
   "repository": "https://github.com/rayanhassan7333-prog/nsu-planner-mcp",
   "license": "MIT"
 }
