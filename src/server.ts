@@ -13,6 +13,7 @@ export function createPlannerMcpServer(): McpServer {
       title: 'NSU Course Planner',
       version: '1.0.0',
       description: 'North South University (NSU) course advising, schedule planning, and clash detection MCP server.',
+      websiteUrl: 'https://nsu-planner-mcp.vercel.app',
       icons: NSU_SERVER_ICONS,
     },
     {
