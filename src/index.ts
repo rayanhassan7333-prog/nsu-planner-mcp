@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js'
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
@@ -22,8 +23,9 @@ app.use((_req, res, next) => {
 })
 app.use(express.json())
 
-// Serve static assets (logo.png, favicon.ico)
-app.use(express.static('public'))
+// Serve static assets (logo.png, favicon.ico, etc.) safely across local and Vercel serverless environments
+const publicDir = path.join(process.cwd(), 'public')
+app.use(express.static(publicDir))
 
 // Health check / root
 app.get('/', (_req, res) => {
