@@ -4,7 +4,7 @@
   "description": "Smart course advising assistant for North South University (NSU). Automates timetable generation, clash detection, faculty preferences, and final exam conflict prevention.",
   "version": "1.0.0",
   "author": "Rayan Hassan",
-  "logo": "assets/logo.svg",
+  "logo": "assets/logo.png",
   "suggestedPrompts": [
     "Plan a routine for CSE115, MAT116, ENG102 with at most 1 final per day",
     "Find available sections of CSE311 with open seats in Fall 2026",

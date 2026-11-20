@@ -4,12 +4,16 @@ import { listAvailableSemesters, getCoursesForSemester } from './data/index.js'
 import { checkSectionsForConflicts } from './engine/conflict.js'
 import { solveRoutines } from './engine/solver.js'
 import type { CourseRow } from './types/index.js'
+import { NSU_SERVER_ICONS } from './icons.js'
 
 export function createPlannerMcpServer(): McpServer {
   const server = new McpServer(
     {
       name: 'NSU Advising Planner',
+      title: 'NSU Course Planner',
       version: '1.0.0',
+      description: 'North South University (NSU) course advising, schedule planning, and clash detection MCP server.',
+      icons: NSU_SERVER_ICONS,
     },
     {
       capabilities: {
